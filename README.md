@@ -28,18 +28,6 @@
 - **Custom Generation Profiles**: Preset configurations for different musical styles
 - **Plugin Parameter Mapping**: Direct integration with VST plugin interfaces
 
-###  Performance & Reliability
-- **GPU Acceleration**: CUDA-optimized inference for maximum speed
-- **Memory Management**: Intelligent model loading/unloading based on usage
-- **Rate Limiting**: Built-in protection against overload
-- **Comprehensive Monitoring**: Real-time metrics and performance tracking
-
-###  Developer Experience
-- **Extensive Testing Suite**: Full unit and integration test coverage
-- **Modular Architecture**: Easily extensible for new model types
-- **Plugin SDK**: Comprehensive VST plugin development framework
-- **Cross-Platform Support**: Windows, macOS, and Linux compatibility
-
 ##  Aurora Use Cases
 
 ### 1. **Professional VST Plugin Integration**
@@ -51,27 +39,7 @@
 ### 2. **Real-time Live Performance**
 - Generate musical ideas on-the-fly during live performances
 - MIDI streaming directly to your DAW for immediate playback
-- Adaptive tempo and key detection for responsive music creation
-- Performance-ready presets for different musical contexts
 
-### 3. **Intelligent MIDI Enhancement**
-- Transform existing compositions with Aurora's AI enhancement
-- Harmonic richness analysis and improvement suggestions
-- Multiple variation generation for creative exploration
-- Preserve original intent while adding sophisticated musical elements
-
-### 4. **Album Production Pipeline**
-- Generate complete track elements for professional production
-- Cinematic scoring capabilities for media projects
-- Advanced harmony generation with voice leading
-- Electronic rhythm creation with customizable intensity
-- Session export formats for seamless DAW integration
-
-### 5. **Music Education & Analysis**
-- Comprehensive musical analysis with detailed scoring
-- Educational insights into harmony, rhythm, and composition
-- AI-powered suggestions for musical improvement
-- Deep learning analysis of musical patterns and structures
 
 ##  Quick Start
 
@@ -107,7 +75,7 @@ After setup completes, install PyTorch based on your hardware:
 **For NVIDIA GPU (CUDA):**
 ```bash
 # Windows/Linux
-python -m pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
+python -m pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124
 
 # Check CUDA version first: nvidia-smi
 # For CUDA 12.1, use: --index-url https://download.pytorch.org/whl/cu121
@@ -277,26 +245,14 @@ Expected files in `models/` folder:
 - **Storage**: 10GB+ free space
 - **CUDA**: 11.8 or 12.1
 
-#### Performance Expectations
-- **With GPU**: 50-200ms per generation (real-time capable)
-- **With CPU**: 1-5 seconds per generation (still usable)
-- **Model Loading**: 2-10 seconds depending on hardware
-
-### Performance Optimization
-- **GPU Acceleration**: Aurora automatically detects and uses NVIDIA GPUs
-- **Memory Management**: Intelligent model loading based on available RAM
-- **Multi-threading**: Optimized for real-time performance in DAWs
-- **Model Caching**: Keeps frequently used models in memory
-
 ## ⚙️ Aurora Configuration
 
 ### Plugin Settings
 Aurora's interface provides intuitive controls for all generation parameters:
 
-- **Model Selection**: Choose from different Aurora AI models
+- **Model Selection**: Choose from different Aurora AI models from settings page
 - **Style Presets**: Pre-configured settings for various musical genres
 - **Generation Controls**: Temperature, creativity, and complexity sliders
-- **MIDI Output**: Direct routing to DAW tracks and instruments
 
 ### Model Management
 Aurora automatically manages model loading and switching:
@@ -305,10 +261,6 @@ Aurora automatically manages model loading and switching:
 - **Background Updates**: New models can be added without restarting
 - **Quality Settings**: Adjust model complexity based on your hardware
 - **Offline Mode**: Work without internet connectivity once models are downloaded
-
-
-
-
 
 
 ## Aurora Troubleshooting
@@ -336,11 +288,6 @@ Aurora automatically manages model loading and switching:
 - Check `models/` folder exists and contains 2.35 GB `.safetensors` file
 - Re-run setup script or use manual installation commands
 
-**CUDA Out of Memory:**
-- Reduce batch size or sequence length
-- Close other GPU-intensive applications
-- Use CPU mode if GPU has insufficient memory
-
 **Server Won't Start:**
 - Check if port 8000 is already in use
 - Verify config/models.yaml exists and is valid
@@ -352,23 +299,6 @@ Aurora automatically manages model loading and switching:
 - Restart your DAW after installation
 - Rescan plugins in your DAW settings
 - Check that you have the correct VST version (VST3 recommended)
-
-**Out of Memory Errors:**
-- Close other memory-intensive applications
-- Reduce model complexity in Aurora settings
-- Ensure you have sufficient RAM (8GB+ recommended)
-
-**Audio Glitches or Latency Issues:**
-- Increase buffer size in your DAW's audio settings
-- Use Aurora's real-time mode for live performance
-- Ensure your system meets minimum requirements
-- Consider upgrading to GPU if using CPU mode
-
-**Slow Generation Speed:**
-- Install CUDA-enabled PyTorch for GPU acceleration
-- Update NVIDIA drivers to latest version
-- Reduce sequence length for faster inference
-- Close unnecessary background applications
 
 ### 📞 Aurora Support
 
