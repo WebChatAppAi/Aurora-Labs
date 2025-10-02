@@ -6,17 +6,17 @@
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.104+-green.svg)](https://fastapi.tiangolo.com/)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
-## 🎛️ Plugin Interface
+##  Plugin Interface
 
 ![Aurora Plugin Interface](Assets/interface.png)
 
-## 🎼 Inside DAW Integration
+##  Inside DAW Integration
 
 ![Aurora Inside DAW](Assets/inside-daw.png)
 
-## 🚀 Aurora Backend Features
+##  Aurora Backend Features
 
-### 🎯 Core Capabilities
+###  Core Capabilities
 - **Advanced AI Model Management**: Sophisticated melody, harmony, and rhythm generation
 - **Real-time MIDI Processing**: Lightning-fast generation for live performance
 - **Professional DAW Integration**: Native support for FL Studio, Ableton Live, Logic Pro
@@ -28,19 +28,19 @@
 - **Custom Generation Profiles**: Preset configurations for different musical styles
 - **Plugin Parameter Mapping**: Direct integration with VST plugin interfaces
 
-### 🔧 Performance & Reliability
+###  Performance & Reliability
 - **GPU Acceleration**: CUDA-optimized inference for maximum speed
 - **Memory Management**: Intelligent model loading/unloading based on usage
 - **Rate Limiting**: Built-in protection against overload
 - **Comprehensive Monitoring**: Real-time metrics and performance tracking
 
-### 🛠️ Developer Experience
+###  Developer Experience
 - **Extensive Testing Suite**: Full unit and integration test coverage
 - **Modular Architecture**: Easily extensible for new model types
 - **Plugin SDK**: Comprehensive VST plugin development framework
 - **Cross-Platform Support**: Windows, macOS, and Linux compatibility
 
-## 🎼 Aurora Use Cases
+##  Aurora Use Cases
 
 ### 1. **Professional VST Plugin Integration**
 - Native integration with major DAWs (FL Studio, Ableton Live, Logic Pro)
@@ -73,7 +73,7 @@
 - AI-powered suggestions for musical improvement
 - Deep learning analysis of musical patterns and structures
 
-## 🚀 Quick Start
+##  Quick Start
 
 Get Aurora up and running in 3 simple steps:
 
@@ -137,7 +137,7 @@ Open http://localhost:8000/docs to see the API documentation and test generation
 
 ---
 
-## 📦 Detailed Installation Guide
+##  Detailed Installation Guide
 
 ### Prerequisites
 - **Python 3.9+** - Required for backend server
@@ -146,7 +146,7 @@ Open http://localhost:8000/docs to see the API documentation and test generation
 - **GPU with CUDA** (Optional but recommended) - 10-50x faster inference
 - **~5GB free disk space** - For models and dependencies
 
-### 🔧 What Happens During Setup
+###  What Happens During Setup
 
 The setup script automates these steps:
 
@@ -161,7 +161,7 @@ The setup script automates these steps:
 6. **Dependencies**: Installs packages from `requirements.txt`
 7. **PyTorch Prompt**: Shows install commands for your system
 
-### 📋 Manual Installation (If Automated Script Fails)
+###  Manual Installation (If Automated Script Fails)
 
 ```bash
 # 1. Create folders
@@ -187,7 +187,7 @@ pip install -r requirements.txt
 rm -rf temp/hf-download
 ```
 
-### 🎛️ VST Plugin Installation
+###  VST Plugin Installation
 
 #### Install Aurora VST Plugin
 1. Copy the `Assets/AruraMelody.vst3` file to your VST3 directory:
@@ -202,7 +202,7 @@ rm -rf temp/hf-download
 4. Drag AruraMelody onto a MIDI track or instrument slot
 5. Start generating AI-powered melodies!
 
-### 🚀 Starting the Server
+###  Starting the Server
 
 After installation, start the Aurora backend server:
 
@@ -222,7 +222,7 @@ The API will be available at:
 - **ReDoc**: http://localhost:8000/redoc
 - **API Endpoint**: http://localhost:8000/api/v1/
 
-### 🔧 Model Configuration
+###  Model Configuration
 ```yaml
 # Aurora automatically creates this configuration file
 # Usually located at: ~/Documents/Aurora/models.yaml
@@ -262,7 +262,7 @@ Expected files in `models/` folder:
 - `melody_model_config.json` (326 bytes)
 - `alv_tokenizer-2.0.1-py3-none-any.whl` (19.7 KB)
 
-### 🎯 System Requirements
+### System Requirements
 
 #### Minimum Requirements
 - **CPU**: Multi-core processor (Intel i5/AMD Ryzen 5 or better)
@@ -282,7 +282,7 @@ Expected files in `models/` folder:
 - **With CPU**: 1-5 seconds per generation (still usable)
 - **Model Loading**: 2-10 seconds depending on hardware
 
-### ⚡ Performance Optimization
+### Performance Optimization
 - **GPU Acceleration**: Aurora automatically detects and uses NVIDIA GPUs
 - **Memory Management**: Intelligent model loading based on available RAM
 - **Multi-threading**: Optimized for real-time performance in DAWs
@@ -311,9 +311,9 @@ Aurora automatically manages model loading and switching:
 
 
 
-## 🐛 Aurora Troubleshooting
+## Aurora Troubleshooting
 
-### 🔍 Common Issues & Solutions
+### Common Issues & Solutions
 
 **Setup Script Fails:**
 - Ensure Python 3.9+ and Git are installed and in PATH
@@ -372,10 +372,10 @@ Aurora automatically manages model loading and switching:
 
 ### 📞 Aurora Support
 
-- **🐛 Bug Reports**: [GitHub Issues](https://github.com/WebChatAppAi/Aurora-Labs/issues)
-- **💬 Community Discussions**: [GitHub Discussions](https://github.com/WebChatAppAi/Aurora-Labs/discussions)
-- **📧 Support**: support@auroralabs.ai
-- **🎯 Feature Requests**: Use GitHub Issues with `enhancement` label
+- **Bug Reports**: [GitHub Issues](https://github.com/WebChatAppAi/Aurora-Labs/issues)
+- **Community Discussions**: [GitHub Discussions](https://github.com/WebChatAppAi/Aurora-Labs/discussions)
+- **Support**: support@auroralabs.ai
+- ** Feature Requests**: Use GitHub Issues with `enhancement` label
 
 ## 📁 Project Structure
 
