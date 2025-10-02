@@ -1,0 +1,17 @@
+fastapi>=0.104.0
+uvicorn[standard]>=0.24.0
+python-multipart>=0.0.6
+
+# Configuration management
+pyyaml>=6.0.0
+
+pydantic>=2.0.0
+
+# MIDI processing (from your tokenizer)
+
+# Optional: for development and testing
+pytest>=7.0.0
+httpx>=0.25.0  # for testing API endpoints
+
+# Logging and monitoring (optional)
+python-json-logger>=2.0.0

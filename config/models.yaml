@@ -1,0 +1,148 @@
+# Professional Model Configuration for Scalable AI Music API
+# This YAML supports multiple model types, architectures, and future expansions
+
+api:
+  host: "0.0.0.0"
+  port: 8000
+  title: "AI Music Generation API"
+  version: "2.0.0"
+  description: "Professional API for AI-powered music generation"
+
+# Model storage configuration
+storage:
+  models_root: "E:/LATEST-MIDI-MODEL-PLANNING/Aurora-Melody-Tokenizer/model500m"  # Root directory containing all model folders
+  cache_enabled: true
+  max_loaded_models: 3  # Memory management
+  auto_unload_after: 3600  # seconds
+
+# Tokenizer configuration (can be model-specific)
+tokenizers:
+  melody_tokenizer:
+    type: "MelodyTokenizer"
+    min_pitch: 12
+    max_pitch: 108
+    time_resolution: 16
+
+  # Future tokenizers
+  harmony_tokenizer:
+    type: "HarmonyTokenizer"
+    min_pitch: 21
+    max_pitch: 108
+    chord_types: ["major", "minor", "diminished", "augmented"]
+
+  drum_tokenizer:
+    type: "DrumTokenizer"
+    drum_kit: "standard"
+    velocity_levels: 4
+
+# Model definitions - AUTO-DISCOVERED FROM FILESYSTEM
+# Models are now automatically discovered from the models_root directory
+# The system will scan for .safetensors files and their corresponding .json config files
+models: {}
+  # Models will be auto-discovered from: E:/LATEST-MIDI-MODEL-PLANNING/alv-tokenizer-melody/melody-model/
+  # 
+  # Discovered models will include:
+  # - best_melody_model.safetensors + best_melody_model_config.json
+  # - best_melody_model_2.safetensors + best_melody_model_2_config.json (if config exists)
+  # - melody_model_epoch_17.safetensors + melody_model_epoch_17.json (if config exists)
+  # - melody_model_epoch_18.safetensors + melody_model_epoch_18.json (if config exists)
+  # - melody_model_epoch_24.safetensors + melody_model_epoch_24.json (if config exists)
+  #
+  # You can still manually define models here if needed for specific configurations
+  
+  # Example manual model definition (commented out):
+  # custom_melody_model:
+  #   type: "MelodyTransformer"
+  #   tokenizer: "melody_tokenizer"
+  #   model_file: "custom_model.safetensors"
+  #   config_file: "custom_model.json"
+  #   architecture:
+  #     vocab_size: 901
+  #     d_model: 1024
+  #     n_heads: 16
+  #     n_layers: 12
+  #     d_ff: 4096
+  #     max_seq_len: 200
+  #     dropout: 0.1
+  #   generation_defaults:
+  #     temperature: 1.0
+  #     top_k: 50
+  #     top_p: 0.9
+  #     repetition_penalty: 1.1
+  #     max_length: 120
+  #   tags: ["melody", "custom"]
+  #   description: "Custom melody transformer"
+
+# Advanced generation profiles
+generation_profiles:
+  creative:
+    temperature: 1.3
+    top_k: 80
+    top_p: 0.95
+    repetition_penalty: 1.0
+    description: "High creativity, experimental results"
+
+  balanced:
+    temperature: 1.0
+    top_k: 50
+    top_p: 0.9
+    repetition_penalty: 1.1
+    description: "Balanced creativity and coherence"
+
+  conservative:
+    temperature: 0.7
+    top_k: 30
+    top_p: 0.8
+    repetition_penalty: 1.3
+    description: "Focused, coherent results"
+
+  experimental:
+    temperature: 1.8
+    top_k: 100
+    top_p: 0.98
+    repetition_penalty: 0.9
+    description: "Maximum creativity and diversity"
+
+# Output format configurations
+output_formats:
+  vst_plugin:
+    include_notes: true
+    include_midi: true
+    include_tokens: false
+    note_format: "beats"  # beats, seconds, ticks
+
+  daw_integration:
+    include_notes: true
+    include_midi: true
+    include_tokens: true
+    note_format: "seconds"
+    include_metadata: true
+
+  research:
+    include_notes: true
+    include_midi: true
+    include_tokens: true
+    include_attention_weights: true
+    include_probabilities: true
+
+# Logging and monitoring
+logging:
+  level: "INFO"
+  file: "logs/api.log"
+  max_size: "100MB"
+  backup_count: 5
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+
+# Performance settings
+performance:
+  batch_size_limit: 10
+  sequence_length_limit: 1000
+  generation_timeout: 60  # seconds
+  memory_threshold: 0.9   # GPU memory usage threshold
+
+# Security and rate limiting
+security:
+  rate_limit: "100/minute"
+  max_file_size: "10MB"
+  allowed_file_types: [".mid", ".midi"]
+  cors_origins: ["*"]  # Configure for production
