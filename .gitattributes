@@ -1,0 +1,33 @@
+# Aurora Backend - Git Attributes
+# Ensures proper line endings across platforms
+
+# Auto detect text files and perform LF normalization
+* text=auto
+
+# Explicitly declare shell scripts as text with LF
+*.sh text eol=lf
+
+# Explicitly declare Windows batch files as text with CRLF
+*.bat text eol=crlf
+*.cmd text eol=crlf
+
+
+# Python files should always have LF
+*.py text eol=lf
+dev-notes.md
+# YAML and JSON files should have LF
+*.yaml text eol=lf
+*.yml text eol=lf
+*.json text eol=lf
+
+# Markdown files should have LF
+*.md text eol=lf
+
+# Binary files
+*.safetensors binary
+*.vst3 binary
+*.whl binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary

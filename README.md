@@ -73,16 +73,121 @@
 - AI-powered suggestions for musical improvement
 - Deep learning analysis of musical patterns and structures
 
-## 📦 Aurora Installation
+## 🚀 Quick Start
+
+Get Aurora up and running in 3 simple steps:
+
+### Step 1: Run Setup Script
+
+**Windows:**
+```bash
+setup.bat
+```
+
+**Linux/Mac:**
+```bash
+chmod +x setup.sh
+./setup.sh
+```
+
+**What the setup script does:**
+1. Checks Python 3.9+ and Git are installed
+2. Downloads AI models from Hugging Face (~2.5 GB)
+   - `melody_model.safetensors` → placed in `models/` folder
+   - `melody_model_config.json` → placed in `models/` folder  
+   - `alv_tokenizer-2.0.1-py3-none-any.whl` → placed in `models/` folder
+3. Installs the tokenizer wheel file first
+4. Installs other dependencies (FastAPI, Uvicorn, etc.)
+5. Shows PyTorch installation commands (you choose GPU/CPU)
+
+### Step 2: Install PyTorch
+
+After setup completes, install PyTorch based on your hardware:
+
+**For NVIDIA GPU (CUDA):**
+```bash
+# Windows/Linux
+python -m pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
+
+# Check CUDA version first: nvidia-smi
+# For CUDA 12.1, use: --index-url https://download.pytorch.org/whl/cu121
+```
+
+**For CPU Only (slower):**
+```bash
+python -m pip install torch torchvision torchaudio
+```
+
+**For macOS:**
+```bash
+python3 -m pip install torch torchvision torchaudio
+```
+
+### Step 3: Start the Server
+
+```bash
+# Windows
+python main.py
+
+# Linux/Mac
+python3 main.py
+```
+
+Open http://localhost:8000/docs to see the API documentation and test generation!
+
+---
+
+## 📦 Detailed Installation Guide
 
 ### Prerequisites
-- **Professional DAW**: FL Studio, Ableton Live, Logic Pro, or compatible VST host
-- **GPU with CUDA** (recommended) - For accelerated AI inference
-- **Aurora AI Models** - Pre-trained MIDI generation models (.safetensors format)
-- **4GB+ RAM** - Minimum for basic model loading
-- **Windows 10+ / macOS 10.14+ / Linux** - Supported operating systems
+- **Python 3.9+** - Required for backend server
+- **Git** - For downloading models from Hugging Face
+- **8GB+ RAM** - For model loading
+- **GPU with CUDA** (Optional but recommended) - 10-50x faster inference
+- **~5GB free disk space** - For models and dependencies
 
-### 🚀 Quick Aurora Setup
+### 🔧 What Happens During Setup
+
+The setup script automates these steps:
+
+1. **Validation**: Checks Python 3.9+ and Git are installed
+2. **Directory Creation**: Creates `models/`, `logs/`, and `temp/` folders
+3. **Model Download**: Clones https://huggingface.co/alvanalrakib/Aurora-Labs
+4. **File Organization**:
+   - Copies `melody_model.safetensors` to `models/` (2.35 GB)
+   - Copies `melody_model_config.json` to `models/` (326 bytes)
+   - Copies `alv_tokenizer-2.0.1-py3-none-any.whl` to `models/` (19.7 KB)
+5. **Tokenizer Installation**: Installs the wheel file from `models/` folder
+6. **Dependencies**: Installs packages from `requirements.txt`
+7. **PyTorch Prompt**: Shows install commands for your system
+
+### 📋 Manual Installation (If Automated Script Fails)
+
+```bash
+# 1. Create folders
+mkdir models logs temp
+
+# 2. Download models from Hugging Face
+git clone https://huggingface.co/alvanalrakib/Aurora-Labs temp/hf-download
+cp temp/hf-download/melody_model.safetensors models/
+cp temp/hf-download/melody_model_config.json models/
+cp temp/hf-download/alv_tokenizer-2.0.1-py3-none-any.whl models/
+
+# 3. Install tokenizer first
+pip install models/alv_tokenizer-2.0.1-py3-none-any.whl
+
+# 4. Install dependencies
+pip install -r requirements.txt
+
+# 5. Install PyTorch (choose one)
+# For GPU: pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
+# For CPU: pip install torch torchvision torchaudio
+
+# 6. Cleanup
+rm -rf temp/hf-download
+```
+
+### 🎛️ VST Plugin Installation
 
 #### Install Aurora VST Plugin
 1. Copy the `Assets/AruraMelody.vst3` file to your VST3 directory:
@@ -90,17 +195,32 @@
    - **macOS**: `/Library/Audio/Plug-Ins/VST3/` or `~/Library/Audio/Plug-Ins/VST3/`
    - **Linux**: `/usr/lib/vst3/` or `~/.vst3/`
 
-#### Alternative: Download from Repository
-If you prefer to download the latest version:
-1. Download the Aurora VST plugin from [auroralabs.ai/download](https://auroralabs.ai/download)
-2. Extract and install to your VST3 directory as above
-
 #### First Time Setup in Your DAW
 1. Launch your DAW (FL Studio, Ableton Live, Logic Pro, etc.)
 2. Scan for new plugins (refer to your DAW's plugin management)
 3. Locate "AruraMelody" in your VST plugin list
 4. Drag AruraMelody onto a MIDI track or instrument slot
 5. Start generating AI-powered melodies!
+
+### 🚀 Starting the Server
+
+After installation, start the Aurora backend server:
+
+```bash
+# Start the server
+python main.py
+
+# Or use the start script
+python start_server.py
+
+# With custom configuration
+python main.py --config config/models.yaml --port 8000
+```
+
+The API will be available at:
+- **API Docs**: http://localhost:8000/docs
+- **ReDoc**: http://localhost:8000/redoc
+- **API Endpoint**: http://localhost:8000/api/v1/
 
 ### 🔧 Model Configuration
 ```yaml
@@ -121,10 +241,52 @@ models:
     priority: 2
 ```
 
+### ✅ Verify Installation
+
+Check everything is working:
+
+```bash
+# Check PyTorch
+python -c "import torch; print('PyTorch:', torch.__version__); print('CUDA:', torch.cuda.is_available())"
+
+# Check tokenizer
+python -c "import alv_tokenizer; print('Tokenizer: OK')"
+
+# Check model files (should show ~2.35 GB file)
+ls -lh models/                    # Linux/Mac
+dir models\                       # Windows
+```
+
+Expected files in `models/` folder:
+- `melody_model.safetensors` (2.35 GB)
+- `melody_model_config.json` (326 bytes)
+- `alv_tokenizer-2.0.1-py3-none-any.whl` (19.7 KB)
+
+### 🎯 System Requirements
+
+#### Minimum Requirements
+- **CPU**: Multi-core processor (Intel i5/AMD Ryzen 5 or better)
+- **RAM**: 8GB (model loading + inference)
+- **Storage**: 5GB free space (models + dependencies)
+- **OS**: Windows 10+, macOS 10.14+, Ubuntu 18.04+
+
+#### Recommended Requirements
+- **CPU**: Intel i7/AMD Ryzen 7 or better
+- **GPU**: NVIDIA GPU with 4GB+ VRAM (GTX 1060 or better)
+- **RAM**: 16GB (for multiple models and large sequences)
+- **Storage**: 10GB+ free space
+- **CUDA**: 11.8 or 12.1
+
+#### Performance Expectations
+- **With GPU**: 50-200ms per generation (real-time capable)
+- **With CPU**: 1-5 seconds per generation (still usable)
+- **Model Loading**: 2-10 seconds depending on hardware
+
 ### ⚡ Performance Optimization
 - **GPU Acceleration**: Aurora automatically detects and uses NVIDIA GPUs
 - **Memory Management**: Intelligent model loading based on available RAM
 - **Multi-threading**: Optimized for real-time performance in DAWs
+- **Model Caching**: Keeps frequently used models in memory
 
 ## ⚙️ Aurora Configuration
 
@@ -153,9 +315,42 @@ Aurora automatically manages model loading and switching:
 
 ### 🔍 Common Issues & Solutions
 
+**Setup Script Fails:**
+- Ensure Python 3.9+ and Git are installed and in PATH
+- Check internet connection for Hugging Face download (~2.5 GB)
+- Try manual installation steps if automated script fails
+- Windows: Run as Administrator if permission errors occur
+
+**"No module named torch" Error:**
+- PyTorch not installed - it's a separate step after setup
+- For GPU: `pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118`
+- For CPU: `pip install torch torchvision torchaudio`
+
+**"No module named alv_tokenizer" Error:**
+- Setup script didn't complete successfully
+- Manually install: `pip install models/alv_tokenizer-2.0.1-py3-none-any.whl`
+- Or download from: https://huggingface.co/alvanalrakib/Aurora-Labs
+
+**Model Files Not Found:**
+- Setup script didn't download models successfully
+- Check `models/` folder exists and contains 2.35 GB `.safetensors` file
+- Re-run setup script or use manual installation commands
+
+**CUDA Out of Memory:**
+- Reduce batch size or sequence length
+- Close other GPU-intensive applications
+- Use CPU mode if GPU has insufficient memory
+
+**Server Won't Start:**
+- Check if port 8000 is already in use
+- Verify config/models.yaml exists and is valid
+- Check logs/api.log for detailed error messages
+- Ensure all dependencies are installed: `pip install -r requirements.txt`
+
 **Plugin Not Recognized by DAW:**
 - Ensure Aurora VST plugin is installed in the correct VST directory
 - Restart your DAW after installation
+- Rescan plugins in your DAW settings
 - Check that you have the correct VST version (VST3 recommended)
 
 **Out of Memory Errors:**
@@ -167,11 +362,13 @@ Aurora automatically manages model loading and switching:
 - Increase buffer size in your DAW's audio settings
 - Use Aurora's real-time mode for live performance
 - Ensure your system meets minimum requirements
+- Consider upgrading to GPU if using CPU mode
 
-**Model Loading Issues:**
-- Verify model files are in the correct directory
-- Check file permissions for Aurora's model folder
-- Ensure CUDA drivers are up to date (for GPU acceleration)
+**Slow Generation Speed:**
+- Install CUDA-enabled PyTorch for GPU acceleration
+- Update NVIDIA drivers to latest version
+- Reduce sequence length for faster inference
+- Close unnecessary background applications
 
 ### 📞 Aurora Support
 
@@ -179,6 +376,32 @@ Aurora automatically manages model loading and switching:
 - **💬 Community Discussions**: [GitHub Discussions](https://github.com/WebChatAppAi/Aurora-Labs/discussions)
 - **📧 Support**: support@auroralabs.ai
 - **🎯 Feature Requests**: Use GitHub Issues with `enhancement` label
+
+## 📁 Project Structure
+
+```
+Aurora-Backend/
+├── setup.bat                          # Windows automated setup
+├── setup.sh                           # Linux/Mac automated setup
+├── main.py                            # Server entry point
+├── requirements.txt                   # Python dependencies
+├── config/
+│   └── models.yaml                   # Configuration
+├── models/                           # Downloaded by setup script
+│   ├── melody_model.safetensors      # AI model (2.35 GB)
+│   ├── melody_model_config.json      # Model config
+│   └── alv_tokenizer-2.0.1-py3-none-any.whl  # Tokenizer
+├── app/
+│   ├── api/endpoints.py              # API routes
+│   ├── core/config.py                # Config manager
+│   ├── models/                       # Model classes
+│   ├── schemas/                      # Request/Response schemas
+│   ├── services/model_registry.py    # Model loading
+│   └── utils/                        # Helper functions
+├── Assets/
+│   └── AruraMelody.vst3              # VST plugin
+└── logs/                             # Application logs
+```
 
 ## 📄 License
 

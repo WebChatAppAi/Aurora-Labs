@@ -10,7 +10,7 @@ api:
 
 # Model storage configuration
 storage:
-  models_root: "E:/LATEST-MIDI-MODEL-PLANNING/Aurora-Melody-Tokenizer/model500m"  # Root directory containing all model folders
+  models_root: "./model"  # Root directory containing all model folders
   cache_enabled: true
   max_loaded_models: 3  # Memory management
   auto_unload_after: 3600  # seconds
